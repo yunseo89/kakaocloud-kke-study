@@ -40,6 +40,8 @@
 - 라우팅 테이블을 통해 서브넷 내부에서 특정 목적지를 향하는 요청에 대한 규칙을 설정할 수 있다. 프라이빗 서브넷에서 외부로 나가는 요청은 해당 서브넷이 속한 가용영역의 NAT로 라우팅 되게 한다.(nat -> 외부)
 
 - vpc 토폴로지 탭에서 구성을 확인한다.
+- 
+<img width="700" height="750" alt="image" src="https://github.com/user-attachments/assets/d774ba58-4fea-4b83-a2d3-78521d9a1880" />
 
 ----
 ## Container Registry를 이용한 이미지 저장 및 사용
@@ -47,8 +49,56 @@
 
 ### 1. 시나리오 소개
 
-- 
+- 카카오클라우드의 CR을 사용하여 컨테이너 이미지를 저장하고, 이를 활용한다.
+- 로컬 환경에서 예제 프로젝트를 도커 이미지로 빌드하고, CR 업로드 후 이미지 등록 및 다운로드까지의 전 과정을 실습한다.
 
+### 시작하기 전에...
+- Homebrew, Git, Docker 설치가 필요
+
+### step 1. container registry 생성
+### step 2. 예제 프로젝트 도커 이미지 빌드
+- 서버 프로젝트 설치
+- 서버 프로젝트 빌드
+
+#### 서버 프로젝트란?
+> 백엔드
+
+docker build -t kakaocloud-library-server:latest --platform linux/amd64 -f ./server/deploy/Dockerfile ./server 
+명령어를 통해 도커파일을 이미지로 만듦. 도커가 리눅스 OS도 깔고, 필요한 프로그램을 설치함...
+
++ -t = Name tag의 약자, kakaocloud-library-server 라는 이미지명에 버전은 latest로 적는다
++ --platform linux/amd64 = Mac은 ARM cpu를 사용하고, 카카오클라우드 서버는 AMD64를 사용한다. 따라서 클라우드 서버에 맞춰서 포장시킴
++ -f = file의 약자, 도커파일의 위치를 지정함 // ./server 에 context(재료)가 있어 지정해줌.
+
+docker tag kakaocloud-library-server:latest ${PROJECT_NAME}.kr-central-2.kcr.dev/${REPOSITORY_NAME}/kakaocloud-library-server:latest
+
+
+= docker tag [기존이름] [새로운이름]의 구조, 이름은 그대로 주소만 추가!
+
++ kr-central-2.kcr.dev = kakao container registry의 약자, 도커 이미지 전용 창고 주소이다.
++ kakaocloud-library-server:latest = 목적지에 도착해서 보관될 최종 이미지의 이름과 버전(latest)
+
+- 클라이언트 프로젝트 빌드
+- 클라이언트 프로젝트 태그 설정
+  
+#### 클라이언트 프로젝트란?
+> 프론트엔드
+> -> 서버용, 클라이언트용 도커 이미지를 따로 만들어서 클라우드에 올리는게 정석이다(=MSA)
+
+### step 3. 예제 프로젝트 이미지 업로드
+- CR 로그인
+- 이미지 업로드
+
+### step 4. 결과 확인
+
+#### 카클 콘솔 상에서 확인
+
+<img width="3790" height="1346" alt="image" src="https://github.com/user-attachments/assets/53ef1ca6-bfd2-4b81-8f23-9f7b12933e12" />
+
+
+#### 터미널에서 확인(docker images)
+
+<img width="1708" height="284" alt="image" src="https://github.com/user-attachments/assets/9b2549dc-d61a-4869-b319-056bfb2bd5fc" />
 
 
 
