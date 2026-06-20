@@ -117,10 +117,18 @@ docker tag kakaocloud-library-server:latest ${PROJECT_NAME}.kr-central-2.kcr.dev
 - 쿠버네티스 커맨드 라인 도구인 kubectl로 명령어를 실행해서 쿠버네티스 API를 호출한다.<br>
 (클러스터와의 모든 상호작용은 제어 영역에 있는 쿠버네티스 API 서버로의 API 호출을 통해 수행된다.)
 
-#### kubectl 설치
+#### kubectl 사용을 위한 설치 + kubeconfig 파일 다운로드 및 설정
 
-1. Homebrew 이용(사용)
-2. curl 이용
+1. Homebrew를 이용하여 설치
+- 카카오클라우드 콘솔에서 생성한 쿠버네티스 클러스터의 kubeconfig 파일을 다운로드 받는다.
+- 클러스터에 대한 접근을 구성하기 위해 야믈파일의 env 필드를 수정한다.
+
+<img width="3024" height="1054" alt="image" src="https://github.com/user-attachments/assets/6ad5f48f-cdab-4716-8d82-98a85dcf1215" />
+
+(수정한 야믈 파일 - 사용자 엑세스키 ID와 보안 액세스키 입력) 
+
+- 설정한 config 파일을 kubectl
+
 
 
 
