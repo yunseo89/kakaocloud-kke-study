@@ -114,11 +114,13 @@ docker tag kakaocloud-library-server:latest ${PROJECT_NAME}.kr-central-2.kcr.dev
 - 이전 실습에서 NAT 인스턴스를 띄우고 프라이빗 서브넷용 보안그룹을 만든 이유는 프라이빗 서브넷 속 인스턴스가 안전하게 NAT를 통해 외부와 통신하게 하기 위해서이다. 현재 k8s 노드도 전부 프라이빗 서브넷에 생성하기 때문에(보안 이슈), 이전에 CR에 올려둔 도커 이미지를 pull 해오려면 해당 보안그룹이 필요하다.
 
 ### step 2. kubectl 로 쿠버네티스 API 호출
-- 쿠버네티스 CLI인 kubectl로 명령어를 실행해서 쿠버네티스 API를 호출한다.<br>
-(클러스터와의 상호작용은 제어 영역에 있는 쿠버네티스 API 서버에 API 호출을 통해 수행된다.)
+- 쿠버네티스 커맨드 라인 도구인 kubectl로 명령어를 실행해서 쿠버네티스 API를 호출한다.<br>
+(클러스터와의 모든 상호작용은 제어 영역에 있는 쿠버네티스 API 서버로의 API 호출을 통해 수행된다.)
 
 #### kubectl 설치
 
+1. Homebrew 이용(사용)
+2. curl 이용
 
 
 
